@@ -19,7 +19,7 @@ namespace CSVParseTest
             int rowCount = 0;
             CSVParser parse = new CSVParser();
             List<OutputCSVModel> lst = parse.Read(@"C:\Users\Fenil\source\repos\CSVParse\Files\DataExtractor_Example_Input_NoContractSize.csv", "DataExtractor_Example_Input_NoContractSize.csv", ref rowCount);
-            Assert.IsTrue(lst.Count > 0 && lst.Count == rowCount); //Number of records in the source file should be >0 and same as the records in the file to be written.
+            Assert.IsFalse(lst.Count == rowCount); //Number of records in the source file would not be same as the records in the file to be written because of no value for Price Multiplier in the Algo Params column in one of the record.
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace CSVParseTest
             int rowCount = 0;
             CSVParser parse = new CSVParser();
             List<OutputCSVModel> lst = parse.Read(@"C:\Users\Fenil\source\repos\CSVParse\Files\DataExtractor.docx", "DataExtractor.docx", ref rowCount);
-            Assert.IsTrue(lst.Count > 0 && lst.Count == rowCount);//Number of records in the source file should be >0 and same as the records in the file to be written.
+            Assert.IsFalse(lst.Count > 0); //Number of records in the list would be 0 as the file is a word document.
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace CSVParseTest
             int rowCount = 0;
             CSVParser parse = new CSVParser();
             List<OutputCSVModel> lst = parse.Read(@"C:\Users\Fenil\source\repos\CSVParse\Files\DataExtractor_Example_Input_NoISIN.csv", "DataExtractor_Example_Input_NoISIN.csv", ref rowCount);
-            Assert.IsTrue(lst.Count > 0 && lst.Count == rowCount);//Number of records in the source file should be >0 and same as the records in the file to be written.
+            Assert.IsFalse(lst.Count == rowCount); //Number of records in the source file would not be same as the records in the file to be written as ISIN column is missing.
         }
     }
 }
